@@ -16,17 +16,79 @@
 				dès le matin ou avec un goûter réconfortant. Mais attention, vous verrez
 				qu'il est difficile de s'arrêter.
 			</p>
+
+		</div>
+
+			<div id="hour" class="hour">
+				<h2>Contactez nous</h2>
+				<p>Adresse : {{ address }} </p>
+				<p>Téléphone : {{ phone }} </p>
+				<p>Email : {{ email }} </p>
+				<p>Horaires :</p>
+				<ul>
+					<li>L-V: 06:00 à 16:00</li>
+					<li>Samedi: 07:00 à 14:00</li>
+					<li>Dimanche: 07:00 à 12:00</li>
+				</ul>
+
+			</div>
+			
 			<footer class="footer">
 				<p>Copyright {{ restaurantName }} 2019</p>
 			</footer>
+
+
+		<div id="panier">
+			<h1>VueMart</h1>
+  
+			<h2>Panier</h2>
+			<ul>
+			  <li>Pommes: {{ costOfApples }} €</li>
+			  <li>Bananes: {{ costOfBanana }} €</li>
+			  <li>Noix de coco: {{ costOfCoco }} €</li>
+			</ul>
+			<p>Total: {{ totalPrice }} €</li>
+		 
 		</div>
+		<h1>VueMart</h1>
+  
+  <h2>Panier</h2>
+  <ul>
+    <li>Pommes: 6€</li>
+    <li>Bananes: 2€</li>
+    <li>Noix de coco: 8€</li>
+  </ul>
+  <p>Total: 16€</li>
 
 		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 		<script>
 			const app = new Vue({
 				el: "#app",
 				data: {
-					restaurantName: "La belle vue"
+					restaurantName: "Café avec Vue"
+				}				
+			})
+
+			const hour = new Vue ({
+				el: "#hour",
+				data: {
+					phone: "+33 55 66 66 44 44",
+					email: 'contact@yamail.fr',
+					address: 'rue de la mouche qui fume',
+				}
+			})
+
+			const panier = new Vue ({
+				el: '#panier',
+				data: {
+					costOfApples: 5,
+					costOfBanana: 15,
+					costOfCoco: 10
+				},
+				computed: {
+					totalPrice () {
+						return this.costOfApples + this.costOfBanana + this.costOfCoco
+					}
 				}
 			})
 		</script>
