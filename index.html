@@ -32,7 +32,7 @@
 				</ul>
 
 			</div>
-			
+
 			<footer class="footer">
 				<p>Copyright {{ restaurantName }} 2019</p>
 			</footer>
@@ -43,9 +43,7 @@
   
 			<h2>Panier</h2>
 			<ul>
-			  <li>Pommes: {{ costOfApples }} €</li>
-			  <li>Bananes: {{ costOfBanana }} €</li>
-			  <li>Noix de coco: {{ costOfCoco }} €</li>
+			  <li v-for="item in shoppingCart"> {{ item.label }}: {{ item.cost }} €</li>
 			</ul>
 			<p>Total: {{ totalPrice }} €</li>
 		 
@@ -66,9 +64,16 @@
 				el: "#app",
 				data: {
 					restaurantName: "Café avec Vue"
-				}				
-			})
+				},
+				computed: {
+					copyright() {
+						const currentYear = new Date().getFullYear()
 
+						return 'Copyright ${this.restaurantName} ${currentYear}'	
+					}
+				}	
+			})
+		
 			const hour = new Vue ({
 				el: "#hour",
 				data: {
@@ -81,13 +86,41 @@
 			const panier = new Vue ({
 				el: '#panier',
 				data: {
-					costOfApples: 5,
-					costOfBanana: 15,
-					costOfCoco: 10
-				},
+						shoppingCart: [
+							{
+							label: "Pommes",
+							cost: 10,
+							url: " /apple.html"
+							},
+
+							{
+							label: "Bananes",
+							cost: 20,
+							url: " /banane.html",
+							},
+
+							{
+							label: "Noix de Coco",
+							cost: 30,
+							url: " /coco.html",
+							},
+
+							{
+							label: "Pêches",
+							cost: 40,
+							url: " /peche.html",
+							}
+							]
+						},
+
 				computed: {
 					totalPrice () {
-						return this.costOfApples + this.costOfBanana + this.costOfCoco
+						let total=0
+
+						this.shoppingCart.forEach(item => {
+							total += item.cost
+						});
+						return total
 					}
 				}
 			})
